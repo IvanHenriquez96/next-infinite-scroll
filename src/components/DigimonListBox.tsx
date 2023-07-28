@@ -13,20 +13,26 @@ const DigimonListBox = ({ data }: any) => {
     const indiceInicio = (page - 1) * perPage;
     const indiceFin = indiceInicio + perPage;
     let res: Digimon[] = data.slice(indiceInicio, indiceFin);
-    console.log({ res, data });
 
     return res;
   }
 
   const handleScroll = () => {
-    console.log("handleScroll");
-    if (
-      window.innerHeight + document.documentElement.scrollTop !==
-      document.documentElement.offsetHeight
-    ) {
-      return;
+    let scrollTop =
+      (document.documentElement && document.documentElement.scrollTop) ||
+      document.body.scrollTop;
+
+    let scrollHeight =
+      (document.documentElement && document.documentElement.scrollHeight) ||
+      document.body.scrollHeight;
+
+    if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
+      setIsLoading(true);
+      setTimeout(() => {
+        setPage(page + 1);
+        setIsLoading(false);
+      }, 1500);
     }
-    setPage(page + 1);
   };
 
   useEffect(() => {
