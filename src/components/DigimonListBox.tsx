@@ -32,12 +32,12 @@ const DigimonListBox = ({ data }: any) => {
     setDatosDigimons([...datosDigimons, ...digimons]);
     setIsLoading(false);
 
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("touchmove", handleScroll);
+    document.querySelector("body").addEventListener("scroll", handleScroll);
+    document.querySelector("body").addEventListener("touchmove", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("touchmove", handleScroll);
+      document.querySelector("body").removeEventListener("scroll", handleScroll);
+      document.querySelector("body").removeEventListener("touchmove", handleScroll);
     };
   }, [page]);
 
