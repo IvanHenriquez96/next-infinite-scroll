@@ -38,13 +38,13 @@ const DigimonListBox = ({ data }: any) => {
 
     if (body) {
       window.addEventListener("scroll", handleScroll);
-      body.addEventListener("touchmove", handleScroll);
+      window.addEventListener("touchmove", handleScroll);
     }
 
     return () => {
       if (body) {
         window.removeEventListener("scroll", handleScroll);
-        body.removeEventListener("touchmove", handleScroll);
+        window.removeEventListener("touchmove", handleScroll);
       }
     };
   }, [page]);
