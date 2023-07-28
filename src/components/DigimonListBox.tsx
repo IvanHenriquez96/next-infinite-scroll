@@ -13,40 +13,30 @@ const DigimonListBox = ({ data }: any) => {
     const indiceInicio = (page - 1) * perPage;
     const indiceFin = indiceInicio + perPage;
     let res: Digimon[] = data.slice(indiceInicio, indiceFin);
+    console.log({ res, data });
+
     return res;
   }
 
+  const handleScroll = () => {
+    console.log("handleScroll");
+    if (
+      window.innerHeight + document.documentElement.scrollTop !==
+      document.documentElement.offsetHeight
+    ) {
+      return;
+    }
+    setPage(page + 1);
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      console.log("scrolleando");
-
-      const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-      if (scrollTop + clientHeight >= scrollHeight) {
-        setIsLoading(true);
-
-        setTimeout(() => {
-          setPage(page + 1);
-        }, 1000);
-      }
-    };
-
     let digimons = getNextFive(data);
     setDatosDigimons([...datosDigimons, ...digimons]);
     setIsLoading(false);
 
-    let body = document.querySelector("body");
+    window.addEventListener("scroll", handleScroll);
 
-    if (body) {
-      window.addEventListener("scroll", handleScroll);
-      window.addEventListener("touchmove", handleScroll);
-    }
-
-    return () => {
-      if (body) {
-        window.removeEventListener("scroll", handleScroll);
-        window.removeEventListener("touchmove", handleScroll);
-      }
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [page]);
 
   return (
