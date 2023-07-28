@@ -16,8 +16,13 @@ async function getData() {
 export default async function Home() {
   const data = await getData();
   return (
-    <main className="container mx-auto">
-      <DigimonListBox data={data} />
+    <main className="bg-sky-700">
+      <div className="container mx-auto">
+        <h1 className="text-3xl font-bold text-center text-orange-500 py-7">
+          IHENRIQUEZ - INFINITE SCROLL
+        </h1>
+        <DigimonListBox data={data} />
+      </div>
     </main>
   );
 }

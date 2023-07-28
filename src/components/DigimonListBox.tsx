@@ -2,6 +2,7 @@
 import { Digimon } from "@/types/types";
 import { useState, useEffect } from "react";
 import CardDetailsDigimon from "./CardDetailsDigimon";
+import CardSkel from "./CardSkel";
 
 const DigimonListBox = ({ data }: any) => {
   const [page, setPage] = useState(1);
@@ -57,7 +58,7 @@ const DigimonListBox = ({ data }: any) => {
 
   return (
     <div>
-      <p>DigimonListBox</p>
+      {/* <p>DigimonListBox</p> */}
 
       <div className="grid md:grid-cols-3">
         {datosDigimons.map((digimon: Digimon) => (
@@ -66,9 +67,21 @@ const DigimonListBox = ({ data }: any) => {
       </div>
 
       {isLoading && (
-        <div className="text-center mx-2 my-5 py-2 rounded animate-pulse bg-slate-500">
-          Cargando...
+        <div className="grid md:grid-cols-3">
+          <CardSkel />
+          <CardSkel />
+          <CardSkel />
+          <CardSkel />
+          <CardSkel />
+          <CardSkel />
+          <CardSkel />
+          <CardSkel />
+          <CardSkel />
         </div>
+
+        // <div className="text-center mx-2 my-5 py-2 rounded animate-pulse bg-slate-500">
+        //   Cargando...
+        // </div>
       )}
       <br />
     </div>
