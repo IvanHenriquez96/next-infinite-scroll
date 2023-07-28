@@ -19,6 +19,7 @@ const DigimonListBox = ({ data }: any) => {
   useEffect(() => {
     const handleScroll = () => {
       console.log("scrolleando");
+
       const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
       if (scrollTop + clientHeight >= scrollHeight) {
         setIsLoading(true);
@@ -36,14 +37,14 @@ const DigimonListBox = ({ data }: any) => {
     let body = document.querySelector("body");
 
     if (body) {
-      body.addEventListener("scroll", handleScroll);
-      body.addEventListener("scrollend", handleScroll);
+      window.addEventListener("scroll", handleScroll);
+      body.addEventListener("touchmove", handleScroll);
     }
 
     return () => {
       if (body) {
-        body.removeEventListener("scroll", handleScroll);
-        body.removeEventListener("scrollend", handleScroll);
+        window.removeEventListener("scroll", handleScroll);
+        body.removeEventListener("touchmove", handleScroll);
       }
     };
   }, [page]);
