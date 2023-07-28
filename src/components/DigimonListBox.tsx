@@ -35,8 +35,18 @@ const DigimonListBox = ({ data }: any) => {
     setIsLoading(false);
 
     window.addEventListener("scroll", handleScroll);
+    let body = document.querySelector("body");
+    if (body) {
+      body.addEventListener("touchmove", handleScroll);
+    }
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+
+      if (body) {
+        body.removeEventListener("touchmove", handleScroll);
+      }
+    };
   }, [page]);
 
   return (
